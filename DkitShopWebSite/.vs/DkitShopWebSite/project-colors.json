@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4046afc4-76b7-427a-a120-8ba8eaf6f9de": {
+      "ProjectGuid": "4046afc4-76b7-427a-a120-8ba8eaf6f9de",
+      "DisplayName": "DkitShopWebSite",
+      "ColorIndex": 0
+    },
+    "8c58d7cb-7b45-4346-8066-b5f78c42bacd": {
+      "ProjectGuid": "8c58d7cb-7b45-4346-8066-b5f78c42bacd",
+      "DisplayName": "DkitShopWebSite",
+      "ColorIndex": 1
+    },
+    "fbb4e298-410d-41f0-b094-a3b16676d7a7": {
+      "ProjectGuid": "fbb4e298-410d-41f0-b094-a3b16676d7a7",
+      "DisplayName": "DkitShopWebSite",
+      "ColorIndex": 2
+    },
+    "8771e92e-53e8-4602-aad4-1f0dbc98c56f": {
+      "ProjectGuid": "8771e92e-53e8-4602-aad4-1f0dbc98c56f",
+      "DisplayName": "DkitShopWebSite",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

@@ -32,6 +32,7 @@ namespace WebApi
             //Связь между appsettings.json и классом Config
             Configuration.Bind("Project", new Config());
 
+
             // Запускаем наши репозитории
             services.AddTransient<UsersRepository>();
             services.AddTransient<ProductRepository>();
@@ -50,7 +51,6 @@ namespace WebApi
 
             Debug.WriteLine($"Connection string: {Config.ConnectionString} 123");
             // Указываем строку подключения к базе данных
-            //services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
             services.AddControllers();

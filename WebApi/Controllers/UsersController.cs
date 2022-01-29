@@ -60,8 +60,7 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("Edit")]
         public int Edit(string UserData)
-        {
-            var Newuser = JsonSerializer.Deserialize<Users>(UserData);
+        {var Newuser = JsonSerializer.Deserialize<Users>(UserData);
             return repository.Save(Newuser);
         }
     }

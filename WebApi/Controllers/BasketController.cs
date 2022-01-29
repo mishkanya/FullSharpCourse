@@ -32,17 +32,17 @@ namespace WebApi.Controllers
         }
         [HttpGet]
         [Route("Edit")]
-        public int Edit(string ProductData)
+        public int Edit(string BasketData)
         {
-            var basket = JsonSerializer.Deserialize<Basket>(ProductData);
+            var basket = JsonSerializer.Deserialize<Basket>(BasketData);
             return repository.Save(basket);
         }
 
         [HttpGet]
         [Route("Create")]
-        public int Create(string ProductData)
+        public int Create(string BasketData)
         {
-            var basket = JsonSerializer.Deserialize<Basket>(ProductData);
+            var basket = JsonSerializer.Deserialize<Basket>(BasketData);
             return repository.Save(basket);
         }
 
