@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using WebApi.Domain.Entities;
 
@@ -27,7 +28,7 @@ namespace DkitShopWebSite.Domain.Repositories
         /// </summary>
         public static string Save(Users entity)
         {
-            string id = AppServerContext<Users>.Send("Users/Edit?UserData=%data%", entity);
+            string id = AppServerContext<Users>.SendPost("Users/Edit", entity);
             return id;
         }
 
@@ -56,6 +57,11 @@ namespace DkitShopWebSite.Domain.Repositories
         {
             Users response = AppServerContext<Users>.Get($"Users/Login?login={login}&password={password}");
             return response;
+        }
+        public static bool Delete(int? id)
+        {
+            string response = AppServerContext<string>.Get($"Users/Delete?id={id}");
+            return response == "OK";
         }
     }
 }

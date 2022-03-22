@@ -9,9 +9,15 @@ using System.Linq;
 namespace WebApi.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class ProductTypesController : Controller
     {
         private readonly ProductTypesRepository repository;
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
 
         public ProductTypesController(ProductTypesRepository repository)
         {
@@ -31,20 +37,18 @@ namespace WebApi.Controllers
             return repository.GetById(id);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Edit")]
-        public int Edit(string ProductData)
+        public int Edit([FromBody]ProductTypes ProductData)
         {
-            var product = JsonSerializer.Deserialize<ProductTypes>(ProductData);
-            return repository.Save(product);
+            return repository.Save(ProductData);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Create")]
-        public int Create(string ProductData)
+        public int Create([FromBody] ProductTypes ProductData)
         {
-            var product = JsonSerializer.Deserialize<ProductTypes>(ProductData);
-            return repository.Save(product);
+            return repository.Save(ProductData);
         }
 
         [HttpGet]

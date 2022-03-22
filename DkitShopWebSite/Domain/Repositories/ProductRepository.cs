@@ -17,16 +17,16 @@ namespace DkitShopWebSite.Domain.Repositories
 
         public static string Edit(Product entity)
         {
-            string id = AppServerContext<Product>.Send("Product/Edit?ProductData=%data%", entity);
+            string id = AppServerContext<Product>.SendPost("Product/Edit", entity);
             return id;
         }
 
         public static string Create(Product entity)
         {
-            string id = AppServerContext<Product>.Send("Product/Create?ProductData=%data%", entity);
+            string id = AppServerContext<Product>.SendPost("Product/Create", entity);
             return id;
         }
-        public static string Create(int id)
+        public static string Delete(int id)
         {
             string response = AppServerContext<Product>.Send($"Product/Delete?id={id}");
             return response;

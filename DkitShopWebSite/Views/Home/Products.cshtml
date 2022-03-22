@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Наши предложения";
+}
+
+<div class="page-heading products-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                    <h4>Разработка программного обеспечения</h4>
+                    <h2>DkitShop prod.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filters">
+                    <ul>
+                        <li class="active" data-filter="*">Все</li>
+                        @foreach (var i in ProductTypesRepository.Get())
+                        {
+                            <li data-filter=".@i.Name.Replace(" ", "").ToLower()">@i.Name</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="filters-content">
+                    <div class="row grid">
+                        @foreach (var item in ProductRepository.Get())
+                        {
+                            @Html.ProductItem(item)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

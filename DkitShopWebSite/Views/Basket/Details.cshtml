@@ -1,0 +1,45 @@
+﻿@model WebApi.Domain.Entities.Basket
+
+@{
+    ViewData["Title"] = "Details";
+    var user = UsersRepository.GetById(Model.UserId);
+    var product = ProductRepository.GetById(Model.ProductId);
+}
+
+<div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Basket</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class = "col-sm-10">
+            @user.Id | @user.Name
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+        <dd class = "col-sm-10">
+            @product.Id | @product.Name
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>

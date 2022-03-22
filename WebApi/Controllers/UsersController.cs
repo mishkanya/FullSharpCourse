@@ -9,20 +9,30 @@ using System.Linq;
 namespace WebApi.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class UsersController : Controller
     {
         private readonly UsersRepository repository;
+        // Настройки для парсинга json
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
 
         public UsersController(UsersRepository repository)
         {
             this.repository = repository;
         }
+
+
         [HttpGet]
         [Route("Get")]
         public IEnumerable<Users> Get()
         {
             return repository.Get();
         }
+
         [HttpGet]
         [Route("Registration")]
         public string Registration(string login, string password)
@@ -53,15 +63,22 @@ namespace WebApi.Controllers
         {
             var user = repository.Get().FirstOrDefault(t => t.Login == login);
             if (user == null) return "Wrong login";
-            if (user.Password == password) return JsonSerializer.Serialize(user);
+            if (user.Password == password) return JsonSerializer.Serialize(user, options);
             else return "Wrong password";
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Edit")]
-        public int Edit(string UserData)
-        {var Newuser = JsonSerializer.Deserialize<Users>(UserData);
-            return repository.Save(Newuser);
+        public int Edit([FromBody] Users Data)
+        {
+            return repository.Save(Data);
+        }
+        [HttpGet]
+        [Route("Delete")]
+        public string Delete(int id)
+        {
+            repository.DeleteById(id);
+            return "OK";
         }
     }
 }   

@@ -1,0 +1,55 @@
+﻿@model WebApi.Domain.Entities.Users
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1>Create</h1>
+
+<h4>Users</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Users" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Login" class="control-label"></label>
+                <input name="login" asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input name="password" asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input name="isAdmin" class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input name="Name" asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvatarBase64" class="control-label"></label>
+                <input name="AvatarBase64" type="file" accept=".jpg, .jpeg, .png" class="form-control" />
+                <span asp-validation-for="AvatarBase64" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</div>

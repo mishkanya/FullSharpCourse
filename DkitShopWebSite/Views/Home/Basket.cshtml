@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebApi.Domain.Entities.Basket>
+
+@{
+    ViewData["Title"] = "Index";
+    var users = Context.Get<Users>("UserData");
+    var products = ProductRepository.Get();
+}
+
+<div class="container">
+    <br  />
+        <br  />
+        <br  />
+        <br  />
+
+        <h1>Index</h1>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <p>Название товара</p>
+                    </th>
+                    <th>
+                        <p>Цена</p>
+                    </th>
+                    <th>
+                         <p>Время заказа</p>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                        @foreach (var item in Model)
+     
+                  {
+                        <tr>
+                            <td>
+                                @products.First(t => t.Id == item.ProductId).Name
+                            </td>
+                            <td>
+                                @products.First(t => t.Id == item.ProductId).Price $
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderTime)
+                            </td>
+                            <td>
+                                <form method="post" action="DeleteFromBasket">
+                                    <input type="text" hidden value="@item.Id" name="basketElementId">
+
+                            <input type="submit" class="btn btn-primary  btn-sm.btn-block" value="Удалить">
+                                </form>
+
+                            </td>
+                        </tr>
+                        }
+            </tbody>
+        </table>
+        <div class="container">
+              <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
+
+         
+                <a href="#" class="btn btn-outline-primary" role="button">Оплатить</a>
+                    </div>
+              </div>
+        </div>
+</div>

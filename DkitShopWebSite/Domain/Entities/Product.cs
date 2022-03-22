@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DkitShopWebSite.Domain;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApi.Domain.Entities
 {
@@ -19,5 +21,6 @@ namespace WebApi.Domain.Entities
         [Required(ErrorMessage = "Это свойство обязательно к заполнению")]
         [Display(Name = "Тип продукта")]
         public int TypeId { get; set; }
+        
     }
 }

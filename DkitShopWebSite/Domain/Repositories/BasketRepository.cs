@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebApi.Domain.Entities;
+using System;
 
 namespace DkitShopWebSite.Domain.Repositories
 {
@@ -17,19 +18,24 @@ namespace DkitShopWebSite.Domain.Repositories
 
         public static string Edit(Basket entity)
         {
-            string id = AppServerContext<Basket>.Send("Basket/Edit?BasketData=%data%", entity);
+            string id = AppServerContext<Basket>.SendPost("Basket/Edit", entity);
             return id;
         }
 
         public static string Create(Basket entity)
         {
-            string id = AppServerContext<Basket>.Send("Basket/Create?BasketData=%data%", entity);
+            string id = AppServerContext<Basket>.SendPost("Basket/Create", entity);
             return id;
         }
         public static string Create(int id)
         {
             string response = AppServerContext<Basket>.Send($"Basket/Delete?id={id}");
             return response;
+        }
+        public static bool Delete(int? id)
+        {
+            String response = AppServerContext<String>.Get($"Basket/Delete?id={id}");
+            return true;
         }
     }
 }

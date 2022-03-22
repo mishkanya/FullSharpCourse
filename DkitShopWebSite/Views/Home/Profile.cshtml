@@ -1,0 +1,49 @@
+﻿@model WebApi.Domain.Entities.Users
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AvatarBase64)
+        </dt>
+        <dd class = "col-sm-10">
+            @if(Model.AvatarBase64 != null)
+                    {
+                        <img src="@Model.AvatarBase64"/>
+                    }
+                    else
+                    {
+                        <img src="/images/noimg.jpg"/>
+                    }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="/Home/ProfileEdit">Edit</a> |
+    <a href="/Home/Index">Back to List</a>
+</div>
+</div>

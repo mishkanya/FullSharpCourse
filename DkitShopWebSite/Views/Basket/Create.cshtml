@@ -1,0 +1,52 @@
+﻿@model WebApi.Domain.Entities.Basket
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1>Create</h1>
+
+<h4>Basket</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+       <form asp-action="Create" asp-controller="Basket" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select class="form-control" asp-for="UserId" for="UserId" name="UserId">
+                    @foreach (var t in UsersRepository.Get())
+                    {
+                        <option value="@t.Id" >@t.Id | @t.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                <select class="form-control" asp-for="ProductId" for="ProductId" name="ProductId">
+                    @foreach (var o in ProductRepository.Get())
+                    {
+                        <option value="@o.Id">@o.Id | @o.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</div>

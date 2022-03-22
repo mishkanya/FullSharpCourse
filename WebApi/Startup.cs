@@ -32,6 +32,7 @@ namespace WebApi
             //Связь между appsettings.json и классом Config
             Configuration.Bind("Project", new Config());
 
+            services.AddHttpClient();
 
             // Запускаем наши репозитории
             services.AddTransient<UsersRepository>();

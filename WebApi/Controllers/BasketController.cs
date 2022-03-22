@@ -9,9 +9,15 @@ using System.Linq;
 namespace WebApi.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class BasketController : Controller
     {
         private readonly BasketRepository repository;
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
 
         public BasketController(BasketRepository repository)
         {
@@ -30,20 +36,20 @@ namespace WebApi.Controllers
         {
             return repository.GetById(id);
         }
-        [HttpGet]
+
+        [HttpPost]
         [Route("Edit")]
-        public int Edit(string BasketData)
+        public int Edit([FromBody] Basket Data)
         {
-            var basket = JsonSerializer.Deserialize<Basket>(BasketData);
-            return repository.Save(basket);
+            return repository.Save(Data);
         }
 
-        [HttpGet]
+
+        [HttpPost]
         [Route("Create")]
-        public int Create(string BasketData)
+        public int Create([FromBody]Basket Data)
         {
-            var basket = JsonSerializer.Deserialize<Basket>(BasketData);
-            return repository.Save(basket);
+           return repository.Save(Data);
         }
 
         [HttpGet]

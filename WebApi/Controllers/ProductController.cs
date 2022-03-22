@@ -5,13 +5,22 @@ using WebApi.Domain.Repositories;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class ProductController : Controller
     {
         private readonly ProductRepository repository;
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
 
         public ProductController(ProductRepository repository)
         {
@@ -30,19 +39,18 @@ namespace WebApi.Controllers
         {
             return repository.GetById(id);
         }
-        [HttpGet]
+        [HttpPost]
         [Route("Edit")]
-        public int Edit(string ProductData)
+        public int Edit([FromBody] Product product)
         {
-            var product = JsonSerializer.Deserialize<Product>(ProductData);
             return repository.Save(product);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Create")]
-        public int Create(string ProductData)
+        public int Create([FromBody] Product product)
         {
-            var product = JsonSerializer.Deserialize<Product>(ProductData);
+           
             return repository.Save(product);
         }
 

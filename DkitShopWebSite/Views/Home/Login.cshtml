@@ -1,0 +1,395 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<style>
+    a:hover,
+    a:focus {
+        outline: none;
+        text-decoration: none;
+    }
+
+    .tab {
+        border: 1px solid #eee;
+        padding: 40px 50px;
+        position: relative;
+    }
+
+        .tab:before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.85;
+        }
+
+        .tab .nav-tabs {
+            border-bottom: none;
+            padding: 0 20px;
+            position: relative;
+        }
+
+            .tab .nav-tabs li {
+                margin: 0 30px 0 0;
+            }
+
+                .tab .nav-tabs li a {
+                    font-size: 18px;
+                    color: black;
+                    border-radius: 0;
+                    text-transform: uppercase;
+                    background: transparent;
+                    padding: 0;
+                    margin-right: 0;
+                    border: none;
+                    border-bottom: 2px solid transparent;
+                    opacity: 0.5;
+                    position: relative;
+                    transition: all 0.5s ease 0s;
+                }
+
+                    .tab .nav-tabs li a:hover {
+                        background: transparent;
+                        border-bottom: 1px solid #f33f3f;
+                        color: #f33f3f;
+                    }
+
+                .tab .nav-tabs li.active a,
+                .tab .nav-tabs li.active a:focus,
+                .tab .nav-tabs li.active a:hover {
+                    border: none;
+                    background: transparent;
+                    opacity: 1;
+                    border-bottom: 2px solid #f33f3f;
+                    color: #f33f3f;
+                }
+
+        .tab .tab-content {
+            padding: 0 0 0 0;
+            background: transparent;
+            z-index: 1;
+            position: relative;
+        }
+
+    .form-bg {
+        background: #ddd;
+    }
+
+    .titleh2 {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .form-horizontal .form-group {
+        margin: 0 0 15px 0;
+        position: relative;
+    }
+
+    .form-horizontal .form-control {
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid #eee;
+        box-shadow: none;
+        padding: 0 20px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #495057;
+        transition: all 0.3s ease 0s;
+    }
+
+        .form-horizontal .form-control:focus {
+            box-shadow: none;
+            outline: 0 none;
+        }
+
+    .form-horizontal .form-group label {
+        padding: 0 20px;
+        color: #495057;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+    }
+
+    .form-horizontal .main-checkbox {
+        width: 20px;
+        height: 20px;
+        background: #f33f3f;
+        float: left;
+        margin: 5px 0 0 20px;
+        border: 1px solid #f33f3f;
+        position: relative;
+    }
+
+        .form-horizontal .main-checkbox label {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+            .form-horizontal .main-checkbox label:after {
+                content: "*";
+                width: 10px;
+                height: 5px;
+                position: absolute;
+                top: 5px;
+                left: 4px;
+                border: 3px solid #fff;
+                border-top: none;
+                border-right: none;
+                background: transparent;
+                opacity: 0;
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+
+        .form-horizontal .main-checkbox input[type=checkbox] {
+            visibility: hidden;
+        }
+
+            .form-horizontal .main-checkbox input[type=checkbox]:checked + label:after {
+                opacity: 1;
+            }
+
+    .form-horizontal .text {
+        float: left;
+        font-size: 14px;
+        font-weight: bold;
+        color: #495057;
+        margin-left: 7px;
+        line-height: 20px;
+        padding-top: 5px;
+        text-transform: capitalize;
+    }
+
+    .form-horizontal .btn {
+        width: 100%;
+        background: #f33f3f;
+        padding: 10px 20px;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        border-radius: 20px;
+        text-transform: uppercase;
+        margin: 20px 0 30px 0;
+    }
+
+        .form-horizontal .btn:focus {
+            background: #f33f3f;
+            color: #fff;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .form-horizontal .btn:hover {
+            background-color: #121212;
+            color: #fff;
+            outline: none;
+            box-shadow: none;
+        }
+
+    .form-horizontal .forgot-pass {
+        border-top: 1px solid #615f6c;
+        margin: 0;
+        text-align: center;
+    }
+
+        .form-horizontal .forgot-pass .btn {
+            width: auto;
+            background: transparent;
+            margin: 30px 0 0 0;
+            color: #615f6c;
+            text-transform: capitalize;
+            transition: all 0.3s ease 0s;
+        }
+
+            .form-horizontal .forgot-pass .btn:hover {
+                color: #f33f3f;
+            }
+
+</style>
+
+
+
+<style>
+
+    .span_pseudo, .chiller_cb span:before, .chiller_cb span:after {
+        content: "";
+        display: inline-block;
+        background: #fff;
+        width: 0;
+        height: 0.2rem;
+        position: absolute;
+        transform-origin: 0% 0%;
+    }
+
+    .chiller_cb {
+        position: relative;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+    }
+
+        .chiller_cb input {
+            display: none;
+        }
+
+            .chiller_cb input:checked ~ span {
+                background: #fd2727;
+                border-color: #fd2727;
+            }
+
+                .chiller_cb input:checked ~ span:before {
+                    width: 1rem;
+                    height: 0.15rem;
+                    transition: width 0.1s;
+                    transition-delay: 0.3s;
+                }
+
+                .chiller_cb input:checked ~ span:after {
+                    width: 0.4rem;
+                    height: 0.15rem;
+                    transition: width 0.1s;
+                    transition-delay: 0.2s;
+                }
+
+            .chiller_cb input:disabled ~ span {
+                background: #ececec;
+                border-color: #dcdcdc;
+            }
+
+            .chiller_cb input:disabled ~ label {
+                color: #dcdcdc;
+            }
+
+                .chiller_cb input:disabled ~ label:hover {
+                    cursor: default;
+                }
+
+        .chiller_cb label {
+            padding-left: 2rem;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .chiller_cb span {
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid #ccc;
+            position: absolute;
+            left: 0;
+            transition: all 0.2s;
+            z-index: 1;
+            box-sizing: content-box;
+        }
+
+            .chiller_cb span:before {
+                transform: rotate(-55deg);
+                top: 1rem;
+                left: 0.37rem;
+            }
+
+            .chiller_cb span:after {
+                transform: rotate(35deg);
+                bottom: 0.35rem;
+                left: 0.2rem;
+            }
+</style>
+
+<div>
+    <div class="page-heading login-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        <h4>about us</h4>
+                        <h2>our company</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-8">
+                <div class="tab" role="tabpanel">
+                    @if (Model != null)
+                    {
+                        <p class="text-danger text-center">@Model</p>
+                    }
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation">
+                            <a id="loginbtn" href="#Section1" aria-controls="home" role="tab"
+                               data-toggle="tab">Войти</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#Section2" aria-controls="profile" role="tab"
+                               data-toggle="tab">Зарегистрироваться</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane fade in active" id="Section1">
+                            <h2 class="titleh2">Войти</h2>
+                            <form class="form-horizontal" action="Log" method="post">
+                                <div class="form-group">
+                                    <input placeholder="Логин" type="text" class="form-control" name="login" id="logLogin">
+                                </div>
+                                <div class="form-group">
+                                    <input placeholder="Пароль" name="password" type="password" class="form-control" id="logPassword">
+                                </div>
+
+
+                                <div class="chiller_cb">
+                                    <input id="savePassword" type="checkbox">
+                                    <label for="savePassword">Запомнить пароль</label>
+                                    <span></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Войти</button>
+                                </div>
+                                <div class="form-group forgot-pass" hidden>
+                                    <button type="submit" class="btn btn-default">Забыли пароль</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="Section2">
+                            <h2 class="titleh2">Зарегистрироваться</h2>
+                            <form class="form-horizontal" action="Reg" method="post">
+                                <div class="form-group">
+                                    <input placeholder="Логин" type="text" name="login" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input placeholder="Пароль" name="password1" type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input placeholder="Повторите пароль" name="password2" type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.col-md-offset-3 col-md-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+    <script>
+        document.querySelector("#loginbtn").click();
+    </script>
+</div>
